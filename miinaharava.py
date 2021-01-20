@@ -210,12 +210,18 @@ def tulvataytto(lista, x, y):
         tutkittava_x, tutkittava_y = tutkittava
         lista[tutkittava_y][tutkittava_x] = tila["kentta_piilossa"][tutkittava_y][tutkittava_x]
         if lista[tutkittava_y][tutkittava_x] == "0":
-            for rivi in range(tutkittava_y-1, tutkittava_y+2):
-                for sarake in range(tutkittava_x-1, tutkittava_x+2):
-                    if 0 < rivi < len(lista) and 0 < sarake < len(lista[0]):
-                        lista[rivi][sarake] = tila["kentta_piilossa"][rivi][sarake]
-                        if lista[rivi][sarake] == "0":
-                            tutkittavat.append((sarake, rivi))
+            if 0 <= tutkittava_y < len(lista) and 0 <= tutkittava_x-1 < len(lista[0]):
+                if lista[tutkittava_y][tutkittava_x-1] == " ":
+                    tutkittavat.append((tutkittava_x-1, tutkittava_y))
+            if 0 <= tutkittava_y < len(lista) and 0 <= tutkittava_x+1 < len(lista[0]):
+                if lista[tutkittava_y][tutkittava_x+1] == " ":
+                    tutkittavat.append((tutkittava_x+1, tutkittava_y))
+            if 0 <= tutkittava_y-1 < len(lista) and 0 <= tutkittava_x < len(lista[0]):
+                if lista[tutkittava_y-1][tutkittava_x] == " ":
+                    tutkittavat.append((tutkittava_x, tutkittava_y-1))
+            if 0 <= tutkittava_y+1 < len(lista) and 0 <= tutkittava_x < len(lista[0]):
+                if lista[tutkittava_y+1][tutkittava_x] == " ":
+                    tutkittavat.append((tutkittava_x, tutkittava_y+1))
 
 def lippu(x, y):
     #laittaa lipun
